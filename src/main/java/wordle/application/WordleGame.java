@@ -27,7 +27,7 @@ public class WordleGame {
 
     public void startGame() {
         // 시작 전
-        initializeGame();
+        beforeGame();
         inputAndOutput.printWelcome();
         // 진행 중
         boolean isWin = playGame();
@@ -35,34 +35,7 @@ public class WordleGame {
         endGame(isWin);
     }
 
-    private boolean playGame() {
-        int attempt = 0;
-
-        while (attempt < MAX_ATTEMPTS) {
-            String guess = askAnswer();
-            Tile[] result = referee.checkWordle(guess);
-            history.add(result);
-            attempt++;
-
-            inputAndOutput.printHistory(history);
-
-            if (isAllGreen(result)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void endGame(final boolean isWin) {
-        if (isWin) {
-            inputAndOutput.printAttemptCount(history.size(), MAX_ATTEMPTS);
-            inputAndOutput.printHistory(history);
-            return;
-        }
-        inputAndOutput.printEndFail();
-    }
-
-    private void initializeGame() {
+    private void beforeGame() {
         long daysDiff = DateCalculator.calculate(STANDARD_DATE, LocalDate.now());
 
         int index = (int) (daysDiff % wordBook.getSize());
@@ -70,6 +43,25 @@ public class WordleGame {
         String todayAnswer = wordBook.pick(index);
 //        System.out.println("Today's Answer: " + todayAnswer);
         this.referee = new Referee(todayAnswer);
+    }
+
+    private boolean playGame() {
+        while (history.size() < MAX_ATTEMPTS) {
+            if (playRound()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean playRound() {
+        String guess = askAnswer();
+        Tile[] result = referee.checkWordle(guess);
+
+        history.add(result);
+        inputAndOutput.printHistory(history);
+
+        return isAllGreen(result);
     }
 
     private String askAnswer() {
@@ -101,5 +93,14 @@ public class WordleGame {
             }
         }
         return true;
+    }
+
+    private void endGame(final boolean isWin) {
+        if (isWin) {
+            inputAndOutput.printAttemptCount(history.size(), MAX_ATTEMPTS);
+            inputAndOutput.printHistory(history);
+            return;
+        }
+        inputAndOutput.printEndFail();
     }
 }
