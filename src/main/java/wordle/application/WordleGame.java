@@ -17,35 +17,49 @@ public class WordleGame {
     private final WordBook wordBook;
     private final InputAndOutput inputAndOutput;
 
-    private final List<Tile[]> history = new ArrayList<>();
     private Referee referee;
+    private final List<Tile[]> history = new ArrayList<>();
 
     public WordleGame(final WordBook wordBook, final InputAndOutput inputAndOutput) {
         this.wordBook = wordBook;
         this.inputAndOutput = inputAndOutput;
     }
 
-    public void run() {
+    public void startGame() {
+        // 시작 전
         initializeGame();
         inputAndOutput.printWelcome();
-
-        playGame();
+        // 진행 중
+        boolean isWin = playGame();
+        // 결과
+        endGame(isWin);
     }
 
-    private void playGame() {
+    private boolean playGame() {
         int attempt = 0;
+
         while (attempt < MAX_ATTEMPTS) {
             String guess = askAnswer();
             Tile[] result = referee.checkWordle(guess);
             history.add(result);
             attempt++;
-            if (isAllGreen(result)) {
-                inputAndOutput.printAttemptCount(attempt, MAX_ATTEMPTS);
-                inputAndOutput.printHistory(history);
-                return;
-            }
+
             inputAndOutput.printHistory(history);
+
+            if (isAllGreen(result)) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    private void endGame(final boolean isWin) {
+        if (isWin) {
+            inputAndOutput.printAttemptCount(history.size(), MAX_ATTEMPTS);
+            inputAndOutput.printHistory(history);
+            return;
+        }
+        System.out.println("정답 맞추기에 실패했습니다.");
     }
 
     private void initializeGame() {
