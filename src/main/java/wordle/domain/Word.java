@@ -15,9 +15,16 @@ public class Word {
         }
 
         this.letters = new ArrayList<>();
-        for (int i = 0; i < input.length(); i++) {
-            final Letter letter = new Letter(input.charAt(i), i);
-            this.letters.add(letter);
+        for (char c : input.toCharArray()) {
+            this.letters.add(new Letter(c));
         }
+    }
+
+    public String getValue() {
+        StringBuilder builder = new StringBuilder();
+        for (Letter letter : letters) {
+            builder.append(letter.getAlphabet());
+        }
+        return builder.toString();
     }
 }
