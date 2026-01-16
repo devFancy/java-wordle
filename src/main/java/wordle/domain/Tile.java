@@ -3,8 +3,7 @@ package wordle.domain;
 public enum Tile {
     GREEN("\uD83D\uDFE9"),
     YELLOW("\uD83D\uDFE8"),
-    GRAY("⬜")
-    ;
+    GRAY("⬜");
 
     private final String color;
 
@@ -12,7 +11,7 @@ public enum Tile {
         this.color = color;
     }
 
-    private String getColor() {
+    public String getColor() {
         return this.color;
     }
 }
