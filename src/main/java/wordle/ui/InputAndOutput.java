@@ -38,4 +38,8 @@ public class InputAndOutput {
         System.out.println();
         System.out.println(currentAttempt + "/" + maxAttempts);
     }
+
+    public void printEndFail() {
+        System.out.println("정답 맞추기에 실패했습니다.");
+    }
 }

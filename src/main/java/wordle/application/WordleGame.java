@@ -59,7 +59,7 @@ public class WordleGame {
             inputAndOutput.printHistory(history);
             return;
         }
-        System.out.println("정답 맞추기에 실패했습니다.");
+        inputAndOutput.printEndFail();
     }
 
     private void initializeGame() {
