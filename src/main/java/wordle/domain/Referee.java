@@ -1,5 +1,7 @@
 package wordle.domain;
 
+import wordle.exception.WordException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ public class Referee {
 
     public Referee(final String targetWord) {
         if (targetWord.length() != 5) {
-            throw new IllegalArgumentException();
+            throw new WordException("단어가 5글자여야 합니다.");
         }
         this.targetWord = targetWord;
 

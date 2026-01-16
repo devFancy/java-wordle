@@ -1,5 +1,7 @@
 package wordle.domain;
 
+import wordle.exception.WordException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Word {
 
     public Word(final String input) {
         if (input.length() != WORD_LENGTH) {
-            throw new IllegalArgumentException();
+            throw new WordException("단어가 5글자여야 합니다.");
         }
 
         this.letters = new ArrayList<>();

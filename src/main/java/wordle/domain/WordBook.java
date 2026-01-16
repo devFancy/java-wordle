@@ -17,17 +17,12 @@ public class WordBook {
 
     public String pick(final int index) {
         if (index < 0 || index >= words.size()) {
-            throw new IllegalArgumentException("Index out of bound");
+            throw new IndexOutOfBoundsException("Index out of bound");
         }
         return words.get(index).getValue();
     }
 
     public int getSize() {
         return words.size();
-    }
-
-    public boolean contains(final String inputWord) {
-        return words.stream()
-                .anyMatch(word -> word.getValue().equals(inputWord));
     }
 }
