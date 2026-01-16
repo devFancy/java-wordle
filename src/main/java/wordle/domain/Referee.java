@@ -11,7 +11,6 @@ public class Referee {
         if (targetWord.length() != 5) {
             throw new IllegalArgumentException();
         }
-
         this.targetWord = targetWord;
 
         for (char targetWordChar : targetWord.toCharArray()) {
@@ -23,32 +22,34 @@ public class Referee {
         Tile[] result = new Tile[targetWord.length()];
         HashMap<Character, Integer> remainedTargetWordMap = new HashMap<>(targetWordMap);
 
-        // NOTE: GREEN(문자, 위치가 같은지) 확인
+        markGreen(guessWord, result, remainedTargetWordMap);
+        markYellowOrGray(guessWord, result, remainedTargetWordMap);
+        return result;
+    }
+
+    private void markGreen(final String guessWord, final Tile[] result, final HashMap<Character, Integer> remainedTargetWordMap) {
         for (int i = 0; i < guessWord.length(); i++) {
             char targetWordChar = targetWord.charAt(i);
-
             if (targetWordChar == guessWord.charAt(i)) {
                 result[i] = Tile.GREEN;
-                remainedTargetWordMap.put(targetWordChar, targetWordMap.get(targetWordChar) - 1);
+                remainedTargetWordMap.put(targetWordChar, remainedTargetWordMap.get(targetWordChar) - 1);
             }
         }
+    }
 
-        // NOTE: YELLOW OR GRAY 인지 확인
+    private void markYellowOrGray(final String guessWord, final Tile[] result, final HashMap<Character, Integer> remainedTargetWordMap) {
         for (int i = 0; i < guessWord.length(); i++) {
             if (result[i] == Tile.GREEN) {
                 continue;
             }
 
             char guessChar = guessWord.charAt(i);
-
             if (remainedTargetWordMap.getOrDefault(guessChar, 0) > 0) {
                 result[i] = Tile.YELLOW;
                 remainedTargetWordMap.put(guessChar, remainedTargetWordMap.get(guessChar) - 1);
-            } else {
-                result[i] = Tile.GRAY;
+                continue;
             }
+            result[i] = Tile.GRAY;
         }
-
-        return result;
     }
 }

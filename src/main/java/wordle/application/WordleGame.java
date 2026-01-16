@@ -29,15 +29,16 @@ public class WordleGame {
         initializeGame();
         inputAndOutput.printWelcome();
 
-        int attempt = 0;
+        playGame();
+    }
 
+    private void playGame() {
+        int attempt = 0;
         while (attempt < MAX_ATTEMPTS) {
             String guess = askAnswer();
-
             Tile[] result = referee.checkWordle(guess);
             history.add(result);
             attempt++;
-
             if (isAllGreen(result)) {
                 inputAndOutput.printAttemptCount(attempt, MAX_ATTEMPTS);
                 inputAndOutput.printHistory(history);
@@ -53,7 +54,7 @@ public class WordleGame {
         int index = (int) (daysDiff % wordBook.getSize());
 
         String todayAnswer = wordBook.pick(index);
-        System.out.println("Today's Answer: " + todayAnswer);
+//        System.out.println("Today's Answer: " + todayAnswer);
         this.referee = new Referee(todayAnswer);
     }
 

@@ -15,7 +15,6 @@ public class WordBook {
                 .toList();
     }
 
-    // NOTE: 정답 단어 가져오기
     public String pick(final int index) {
         if (index < 0 || index >= words.size()) {
             throw new IllegalArgumentException("Index out of bound");
