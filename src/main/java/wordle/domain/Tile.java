@@ -1,8 +1,8 @@
 package wordle.domain;
 
 public enum Tile {
-    GREEN("\uD83D\uDFE9"),
-    YELLOW("\uD83D\uDFE8"),
+    GREEN("🟩"),
+    YELLOW("🟨"),
     GRAY("⬜");
 
     private final String color;
