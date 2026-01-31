@@ -42,7 +42,7 @@ public class WordleGame {
         int index = (int) (daysDiff % wordBook.getSize());
 
         String todayAnswer = wordBook.pick(index);
-//        System.out.println("Today's Answer: " + todayAnswer);
+        System.out.println("Today's Answer: " + todayAnswer);
         this.referee = new Referee(todayAnswer);
     }
 
@@ -60,7 +60,11 @@ public class WordleGame {
         Tile[] result = referee.checkWordle(guess);
 
         history.add(result);
-        inputAndOutput.printHistory(history);
+        boolean isWin = isAllGreen(result);
+
+        if (!isWin) {
+            inputAndOutput.printHistory(history);
+        }
 
         return isAllGreen(result);
     }
