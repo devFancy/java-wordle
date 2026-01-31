@@ -13,6 +13,7 @@ import java.util.List;
 public class WordleGame {
     private static final LocalDate STANDARD_DATE = LocalDate.of(2021, 6, 19);
     private static final int MAX_ATTEMPTS = 6;
+    private static final int MAX_INPUT_LENGTH = 5;
 
     private final WordBook wordBook;
     private final InputAndOutput inputAndOutput;
@@ -75,7 +76,7 @@ public class WordleGame {
     }
 
     private boolean isValid(final String input) {
-        if (input.length() != 5) {
+        if (input.length() != MAX_INPUT_LENGTH) {
             inputAndOutput.printInvalidInputMessage("단어는 5글자여야 합니다.");
             return false;
         }

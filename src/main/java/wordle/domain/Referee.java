@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Referee {
+    private static final int MAX_TARGET_WORD_LENGTH = 5;
     private final String targetWord;
     private final Map<Character, Integer> targetWordMap = new HashMap<>();
 
     public Referee(final String targetWord) {
-        if (targetWord.length() != 5) {
+        if (targetWord.length() != MAX_TARGET_WORD_LENGTH) {
             throw new WordException("단어가 5글자여야 합니다.");
         }
         this.targetWord = targetWord;
