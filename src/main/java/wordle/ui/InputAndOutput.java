@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class InputAndOutput {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+
+    public InputAndOutput(final Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     public void printWelcome() {
         System.out.printf("WORDLE을 %d번 만에 맞춰 보세요.\n", 6);
