@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import wordle.exception.FileReadFailException;
 
 import java.util.List;
 
@@ -33,6 +34,6 @@ class FileReaderTest {
     @ValueSource(strings = {"", "  ", "test.txt"})
     void FileReader로_텍스트_파일을_읽어오는데_실패하면_예외를_던진다(final String input) {
         assertThatThrownBy(() -> reader.readByLine(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(FileReadFailException.class);
     }
 }
