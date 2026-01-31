@@ -25,7 +25,7 @@ public class Word {
     public String getValue() {
         StringBuilder builder = new StringBuilder();
         for (Letter letter : letters) {
-            builder.append(letter.getAlphabet());
+            builder.append(letter.alphabet());
         }
         return builder.toString();
     }
