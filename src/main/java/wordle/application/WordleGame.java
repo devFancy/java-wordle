@@ -12,7 +12,7 @@ import java.util.List;
 
 public class WordleGame {
     private static final LocalDate STANDARD_DATE = LocalDate.of(2021, 6, 19);
-    private static final int MAX_ATTEMPTS = 6;
+    private static final int MAX_ATTEMPT_COUNT = 6;
     private static final int MAX_INPUT_LENGTH = 5;
 
     private final WordBook wordBook;
@@ -47,7 +47,7 @@ public class WordleGame {
     }
 
     private boolean playGame() {
-        while (history.size() < MAX_ATTEMPTS) {
+        while (history.size() < MAX_ATTEMPT_COUNT) {
             if (playRound()) {
                 return true;
             }
@@ -98,7 +98,7 @@ public class WordleGame {
 
     private void endGame(final boolean isWin) {
         if (isWin) {
-            inputAndOutput.printAttemptCount(history.size(), MAX_ATTEMPTS);
+            inputAndOutput.printAttemptCount(history.size(), MAX_ATTEMPT_COUNT);
             inputAndOutput.printHistory(history);
             return;
         }
