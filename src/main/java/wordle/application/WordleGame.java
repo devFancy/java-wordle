@@ -80,7 +80,7 @@ public class WordleGame {
             inputAndOutput.printInvalidInputMessage("단어는 5글자여야 합니다.");
             return false;
         }
-        if (!input.matches("[a-zA-Z]+")) {
+        if (!input.matches("[a-z]+")) {
             inputAndOutput.printInvalidInputMessage("영문 알파벳만 입력 가능합니다.");
             return false;
         }
